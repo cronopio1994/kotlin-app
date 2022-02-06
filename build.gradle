@@ -1,0 +1,43 @@
+plugins {
+    id("org.springframework.boot") version "2.6.3"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id "org.jetbrains.kotlin.jvm" version "1.6.10"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.6.10"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
+    id 'groovy'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = 'com.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.8")
+    implementation("org.springdoc:springdoc-openapi-security:1.5.8")
+    runtimeOnly("mysql:mysql-connector-java")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict", "-Xjvm-default=enable"]
+        jvmTarget = JavaVersion.VERSION_11
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
