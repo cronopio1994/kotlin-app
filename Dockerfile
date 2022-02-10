@@ -1,9 +1,9 @@
 FROM openjdk:11
 
-COPY ./build/libs/kotlinapp-0.0.1-SNAPSHOT.jar .
+COPY build/libs/kotlinapp-0.0.1-SNAPSHOT.jar .
 
-RUN addgroup --system appuser -g 1001 && \
-    adduser --system -g appuser -u 1001 appuser
+RUN addgroup --system appuser -gid 1001 && \
+    adduser --system -ingroup appuser -u 1001 appuser
 
 
 RUN chown appuser:appuser kotlinapp-0.0.1-SNAPSHOT.jar
